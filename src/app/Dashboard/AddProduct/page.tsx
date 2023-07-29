@@ -1,5 +1,6 @@
 import dbConnect from "@/app/utils/dbConnect";
 import ProductData from "@/app/model/Product";
+import {redirect} from "next/navigation"
 
 type ProductFormData = {
   name: string;
@@ -28,6 +29,7 @@ export default function Page() {
     catch(error){
         console.log(error)
     }
+    redirect('/Dashboard/AddProduct')
   }
   
   return (
