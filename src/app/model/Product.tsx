@@ -7,6 +7,7 @@ interface Product extends  Document {
     description: string;
     details: string;
     price: string;
+    addedOn: Date
 }
 
 //Define the schema for your product
@@ -16,6 +17,10 @@ const productSchema: Schema<Product> = new mongoose.Schema({
     description: String,
     details: String,
     price: String,
+    addedOn: {
+        type: Date,
+        default: Date.now
+    }
 })
 
 mongoose.models = {}
@@ -23,7 +28,7 @@ mongoose.models = {}
 // Get a reference to the default connection and its models
 const connection = mongoose.connection;
 const models = connection.models;
-console.log(models)
+
 // // Reset the models registry by removing all properties
 // Object.keys(models).forEach((modelName) => {
 //   delete models[modelName];
