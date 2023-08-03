@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 const inter = Inter({ subsets: ["latin"] });
 import Navbar from "./components/Navbar";
+import { NextAuthProvider } from "./Providers";
 
 export const metadata: Metadata = {
   title: "iWatch",
@@ -37,8 +38,10 @@ export default function RootLayout({
         crossOrigin="anonymous"
       ></script>
       <body className={inter.className}>
-        <Navbar />
-        {children}
+        <NextAuthProvider>
+          <Navbar />
+          {children}
+        </NextAuthProvider>
       </body>
     </html>
   );
