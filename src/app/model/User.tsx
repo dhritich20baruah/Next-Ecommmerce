@@ -5,8 +5,6 @@ interface User extends  Document {
     userName: string;
     userImage: string;
     userEmail: string;
-    details: string;
-    price: string;
     addedOn: Date
 }
 
@@ -15,8 +13,6 @@ const userSchema: Schema<User> = new mongoose.Schema({
     userName: String,
     userImage: String,
     userEmail: String,
-    details: String,
-    price: String,
     addedOn: {
         type: Date,
         default: Date.now
