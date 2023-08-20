@@ -22,5 +22,5 @@ const userSchema: Schema<User> = new mongoose.Schema({
 mongoose.models = {}
 
 //Define the model using the schema
-const userData: Model<User> = mongoose.model<User>('productData', userSchema)
+const userData: Model<User> = mongoose.model<User>('User', userSchema)
 export default userData

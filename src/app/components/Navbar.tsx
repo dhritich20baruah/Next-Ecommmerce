@@ -1,6 +1,7 @@
 "use client"
 import Link from "next/link";
 import { useSession, signIn, signOut } from 'next-auth/react'
+import getUserByEmail from "../utils/userControl";
 
 const handleSignIn = async () => {
   await signIn();
@@ -10,6 +11,13 @@ const handleSignOut = async () => {
 }
 export default function Navbar() {
   const session = useSession().data;
+  const userEmail = session?.user?.email
+
+  if (userEmail) {
+    getUserByEmail(userEmail);
+  } else {
+    console.log('User email is not available.');
+  }
 
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -62,6 +70,9 @@ export default function Navbar() {
               </a>
             </li>
           </ul>
+          <div>
+            
+          </div>
           {session ?
           <div className="d-flex">
             <p className="text-light m-2">Hello {session.user?.name}</p>
