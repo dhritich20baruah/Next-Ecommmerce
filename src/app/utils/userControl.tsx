@@ -1,16 +1,3 @@
-// import userData from "../model/User";
-// import dbConnect from "./dbConnect";
-
-// export default async function userControl(Email){
-//     dbConnect()
-//     const getUser = await userData.find({ userEmail: Email})   
-//     if (getUser){
-//         return getUser
-//     } else {
-//         console.log('user not found')
-//     }
-// }
-
 import userData from "../model/User"; // Import UserModel type
 import dbConnect from "./dbConnect";
 
