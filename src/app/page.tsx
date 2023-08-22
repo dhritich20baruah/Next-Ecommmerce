@@ -1,5 +1,6 @@
 import dbConnect from "./utils/dbConnect";
 import ProductData from "./model/Product";
+import Link from 'next/link'
 
 export default async function Home() {
   "use server"
@@ -24,7 +25,7 @@ export default async function Home() {
       </div>
       {/* ABOUT */}
       <div className="row d-flex justify-content-center m-5">
-        <img src="https://i.postimg.cc/MHmPsRMg/product5.jpg" alt="" className="col col-md-6" style={{ width: '40%', height:'70vh', objectFit:'cover'}}/>
+        <img src="https://i.postimg.cc/MHmPsRMg/product5.jpg" alt="" className="col col-md-6 shadow-lg" style={{ width: '40%', height:'70vh', objectFit:'cover'}}/>
         <div className="container col col-md-6 d-flex justify-content-center align-items-center">
           <div>
           <p className="fs-4">ABOUT THE PRODUCT</p>
@@ -83,9 +84,11 @@ export default async function Home() {
         <hr />
         {latestProducts.map((element)=>{
           return(
-            <div key={element._id} className="col col-md-4 flex-col text-center">
+            <div key={element._id} className="col col-md-4 flex-col text-center shadow-lg mr-2">
+              <Link href={"/ProductDetails/" + element._id} style={{textDecorationLine: 'none'}} className="text-dark">
               <img src={element.image} alt="" />
               <p>{element.name}</p>
+              </Link>
             </div>
           )
         })}
