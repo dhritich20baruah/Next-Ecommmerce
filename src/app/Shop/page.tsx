@@ -11,17 +11,17 @@ export default async function page() {
         <div className="d-flex">
       {products.map((element) => {
         return (
-          <Link href={"/ProductDetails/"+element._id}>
           <div className="m-3" style={{ width: "18rem", height: '50vh' }} key={element._id}>
+            <Link href={"/ProductDetails/"+element._id} style={{textDecorationLine: 'none'}}>
             <img src={element.image} className="card-img-top" alt="..." style={{width:'100%', height:'50%', objectFit:'cover'}}/>
-            <div className="">
-              <p className="">{element.name}</p>
-              <button className="btn btn-primary">
+            <div className="text-center">
+              <p className="fw-bold text-dark">{element.name}</p>
+              <button className="btn btn-warning text-secondary">
                 Add to Cart
               </button>
             </div>
-          </div>
           </Link>
+          </div>
         );
       })}
       </div>
