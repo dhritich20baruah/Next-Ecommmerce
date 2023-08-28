@@ -1,6 +1,6 @@
 import dbConnect from "./utils/dbConnect";
 import ProductData from "./model/Product";
-import Link from 'next/link'
+import Link from 'next/link';
 
 export default async function Home() {
   "use server"
