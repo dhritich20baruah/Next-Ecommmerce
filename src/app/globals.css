@@ -1,3 +1,7 @@
 .box-shadow:hover{
     box-shadow: 0 0 2em black;
 }
+img{
+    object-fit: contain;
+    height: 50%;
+}

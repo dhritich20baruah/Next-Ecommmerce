@@ -1,6 +1,5 @@
-import dbConnect from "@/app/utils/dbConnect";
-import ProductData from "@/app/model/Product";
 import {redirect} from "next/navigation"
+import { pool } from "../../../../utils/dbConnect";
 
 type ProductFormData = {
   name: string;
@@ -14,7 +13,6 @@ export default function Page() {
     
     async function addProduct(data: FormData) {
     "use server";
-    dbConnect();
     const name = data.get("productName")?.valueOf();
     const image = data.get("imageUrl")?.valueOf();
     const description = data.get("description")?.valueOf();
@@ -22,8 +20,7 @@ export default function Page() {
     const price = data.get("price")?.valueOf();
 
     try{
-        const newProduct = new ProductData({ name, image, description, details, price })
-        await newProduct.save()
+        const newProduct = await pool.query('INSERT INTO product (name, image, description, details, price) VALUES ($1, $2, $3, $4, $5) RETURNING *', [name, image, description, details, price])
         console.log(newProduct)
     }
     catch(error){
