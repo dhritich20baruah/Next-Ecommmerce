@@ -1,12 +1,14 @@
 import dbConnect from "@/app/utils/dbConnect";
 import ProductData from "@/app/model/Product";
 import Link from "next/link";
+import { pool } from "../../../../utils/dbConnect";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  dbConnect();
+  // dbConnect();
   const productId = params.id;
-  const product = await ProductData.findOne({ _id: productId });
-
+  // const product = await ProductData.findOne({ _id: productId });
+  const result = await pool.query('SELECT * FROM product WHERE id = $1', [productId])
+  const product = result.rows[0]
   return (
     <div className="container">
       <div className="row my-3">

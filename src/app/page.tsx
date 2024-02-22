@@ -1,20 +1,22 @@
-import dbConnect from "./utils/dbConnect";
-import ProductData from "./model/Product";
+// import dbConnect from "./utils/dbConnect";
+// import ProductData from "./model/Product";
 import Link from 'next/link';
-
+import { pool } from "../../utils/dbConnect";
 export default async function Home() {
   "use server"
-  dbConnect()
-  const products = await ProductData.find({})
-  const latestProducts = products.slice(-3)
+  // dbConnect()
+  // const products = await ProductData.find({})
+  // const latestProducts = products.slice(-3)
 
+  const result = await pool.query("SELECT * FROM product")
+  const products = result.rows
+  const latestProducts = products.slice(-3)
   return (
     <main>
       <div className="row d-flex justify-content-center">
         <div className="text-center col col-md-6 d-flex justify-content-center align-items-center">
           <p>
           <span className="fs-3">Experience Our New Product</span>
-          <hr />
           Introducing the iWatch Model X3, the latest innovation in smartwatch
           technology. Equipped with a built-in blood pressure monitor, this
           cutting-edge timepiece empowers you to monitor your health on the go.
@@ -29,7 +31,6 @@ export default async function Home() {
         <div className="container col col-md-6 d-flex justify-content-center align-items-center">
           <div>
           <p className="fs-4">ABOUT THE PRODUCT</p>
-          <hr />
           <p className="text-justify">
             Introducing the all-new SmartTime X3, the ultimate smart watch designed to elevate your lifestyle and redefine the way you interact with technology. Packed with cutting-edge features and sleek aesthetics, this next-generation wearable is here to revolutionize your daily routine. Stay connected and organized like never before with the SmartTime X3. Its vibrant, high-resolution display adapts to your surroundings, ensuring crystal-clear visibility in any light. From reading messages to tracking your fitness goals, the intuitive touchscreen makes navigation a breeze. Powered by a state-of-the-art AI assistant, the SmartTime X3 anticipates your needs and delivers personalized suggestions throughout the day. Whether it's suggesting the best route to beat traffic or reminding you of an important meeting, your smart watch is your ever-reliable  companion.
           </p>
@@ -81,11 +82,10 @@ export default async function Home() {
       {/* Latest Products */}
       <div className="latest-product row m-5 container">
         <h3 className="text-center">Latest Products</h3>
-        <hr />
         {latestProducts.map((element)=>{
           return(
             <div key={element._id} className="col col-md-4 flex-col text-center shadow-lg mr-2">
-              <Link href={"/ProductDetails/" + element._id} style={{textDecorationLine: 'none'}} className="text-dark">
+              <Link href={"/ProductDetails/" + element.id} style={{textDecorationLine: 'none'}} className="text-dark">
               <img src={element.image} alt="" />
               <p>{element.name}</p>
               </Link>
