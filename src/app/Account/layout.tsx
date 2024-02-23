@@ -11,9 +11,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div>
-      <NavbarAccounts />
-      {children}
+    <div className='row'>
+    <div className="col col-md-3">
+    <NavbarAccounts />
+    </div>
+    <div className="col col-md-9">
+    {children}
+    </div>
     </div>
   );
 }
