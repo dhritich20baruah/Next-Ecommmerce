@@ -2,6 +2,18 @@
     box-shadow: 0 0 2em black;
 }
 img{
-    object-fit: contain;
+    object-fit: cover;
     height: 50%;
 }
+
+.img-tab {
+    width: 5em;
+    height: 5em;
+    object-fit: cover;
+}
+
+.img-tab-main {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
