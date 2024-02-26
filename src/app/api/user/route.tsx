@@ -1,25 +1,24 @@
-import userData from "@/app/model/User";
-import dbConnect from "@/app/utils/dbConnect";
+import { pool } from "../../../../utils/dbConnect";
 import { NextResponse } from "next/server";
-dbConnect();
 
 export const POST = async (req: Request, res: Response) => {
+  if(req.method !== "POST"){
+    return NextResponse.json({status: 405})
+  }
   const { userName, userEmail, userImage } = await req.json();
   
   console.log(userName, userEmail, userImage);
   try {
-    const existingUser = await userData.findOne({ userEmail });
-    if (existingUser) {
-      return NextResponse.json({message: 'User already exist'});
+    const customer = await pool.query("SELECT * FROM customer where userEmail = $1", [userEmail])
+
+    if (customer.rows.length>0){
+      return NextResponse.json(customer.rows)
     }
-    let addUser = new userData({
-      userName,
-      userEmail,
-      userImage,
-    });
-    console.log(addUser);
-    await addUser.save();
-    return NextResponse.json({ message: "OK", addUser }, { status: 200 });
+    else{
+      const newCustomer = await pool.query(`INSERT INTO customer (userName, userEmail, userImage) VALUES ($1, $2, $3) RETURNING *`, [userName, userEmail, userImage])
+      console.log('MEMBER ADDED')
+      return NextResponse.json({ message: "OK"}, { status: 200 });
+    }
   } catch (err) {
     return NextResponse.json(
       {

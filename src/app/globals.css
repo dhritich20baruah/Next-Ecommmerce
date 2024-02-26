@@ -17,3 +17,9 @@ img{
     height: auto;
     object-fit: contain;
   }
+
+.card-img-top{
+    width: 100%;
+    height: 30em;
+    object-fit: contain;
+}

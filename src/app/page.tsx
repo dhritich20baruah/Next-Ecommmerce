@@ -80,19 +80,24 @@ export default async function Home() {
       </div>
 
       {/* Latest Products */}
-      <div className="latest-product row m-5 container">
-        <h3 className="text-center">Latest Products</h3>
+      <h3 className="text-center m-4">Latest Products</h3>
+      <div className="latest-product my-5 row row-cols-1 row-cols-md-3 g-3 container mx-auto">
         {latestProducts.map((element)=>{
           return(
-            <div key={element._id} className="col col-md-4 flex-col text-center shadow-lg mr-2">
+            <div key={element._id} className="col text-center shadow-lg mr-2">
+              <div className='card'>
               <Link href={"/ProductDetails/" + element.id} style={{textDecorationLine: 'none'}} className="text-dark">
-              <img src={element.image} alt="" />
-              <p>{element.name}</p>
+              <img src={element.image} alt="" className='card-img-top'/>
+              <div className="card-body">
+              <p className='card-title'>{element.name}</p>
+              <p className='card-text fw-bold text-danger'>Rs.{element.price}/-</p>
+              </div>
               </Link>
+              </div>
             </div>
           )
         })}
       </div>
     </main>
-  );
+  )
 }

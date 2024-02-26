@@ -169,7 +169,7 @@ export default async function Page({ params }: { params: { id: string } }) {
         </div>
         <div className="col-12 col-md-6">
           <h3>{product?.name}</h3>
-          <p className="fs-3 text-danger"> {product?.price}</p>
+          <p className="fs-3 text-danger">Rs.{product?.price}/-</p>
           <div className="my-3">
             <span className="fw-bold mx-2">Quantity</span>
             <input type="number" name="quantity" id="quantity" className="border border-light-subtle mx-1" style={{width: '2em', height: '2.5em'}}/>

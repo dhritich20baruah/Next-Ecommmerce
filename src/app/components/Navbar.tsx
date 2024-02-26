@@ -14,7 +14,7 @@ export default function Navbar() {
   const handleSignIn = async () => {
     try {
       await signIn("google");
-      console.log("logged in");
+      setUser()
     } catch (error) {
       console.error("Error:", error);
     }
@@ -28,16 +28,15 @@ export default function Navbar() {
         userEmail: session?.user?.email,
         userImage: session?.user?.image,
       };
-      console.log(userObj);
       // Call your API endpoint
-      const response = await axios.post("/api/user", userObj);
+      const response = await axios.post("/api/user", userObj).then(()=> alert('New User Added'));
       console.log(response);
     }
   };
 
   useEffect(() => {
     setUser()
-  }, [])
+  }, [session])
   
 
   return (
