@@ -1,14 +1,13 @@
-import dbConnect from "@/app/utils/dbConnect";
-import ProductData from "@/app/model/Product";
-import Link from "next/link";
 import { pool } from "../../../../utils/dbConnect";
+import ActionBtns from "./ActionBtns";
 
 export default async function Page({ params }: { params: { id: string } }) {
-  // dbConnect();
   const productId = params.id;
-  // const product = await ProductData.findOne({ _id: productId });
   const result = await pool.query('SELECT * FROM product WHERE id = $1', [productId])
   const product = result.rows[0]
+  
+ 
+
   return (
     <div className="container">
       <div className="row my-3">     
@@ -161,10 +160,7 @@ export default async function Page({ params }: { params: { id: string } }) {
             </div>
          
           <div className="d-flex justify-content-center my-5">
-          <button className="btn btn-danger text-light fw-bold m-2">BUY</button>
-          <Link href="/Cart">
-          <button className="btn btn-warning text-secondary fw-bold m-2">ADD TO CART</button>
-          </Link>
+            <ActionBtns productId={productId}/>
           </div>
         </div>
         <div className="col-12 col-md-6">
